@@ -1,0 +1,57 @@
+﻿@model IEnumerable<VAII.Models.AcountModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<script>
+    function edit(a) {
+        let cesta = "Users/Edit" + "?" + "id=" + a + "&m=" + document.getElementById(a + "?firstname").value + "&p=" + document.getElementById(a + "?lastname").value;
+        //alert(cesta);
+        window.location.href = cesta;
+    }
+</script>
+
+<h1>Index</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Username
+            </th>
+            <th>
+                FirstName
+            </th>
+            <th>
+                model.LastName
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <form asp-action="index">
+            <tr>
+                <td>
+                    @item.Username
+                </td>
+                <td>
+                    <input id="@item.Username?firstname" class="form-control" value="@item.FirstName"/>
+                        
+                </td>
+                <td>
+                    <input id="@item.Username?lastname" class="form-control" value="@item.LastName"/>
+                        
+                </td>
+                <td>
+                    <a href="#" class="btn-block" onclick="edit('@item.Username')">save</a>
+                </td>
+                <td>
+                    <a href="Users/Delete?id=@item.Username" class="btn-danger">delete</a>
+                </td>
+            </tr>
+        </form>
+        }
+    </tbody>
+</table>
